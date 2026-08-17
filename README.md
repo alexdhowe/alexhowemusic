@@ -64,17 +64,22 @@ link the first time. Until you click it, submissions don't get delivered.
 
 ### A photo
 
-Drop a photo at **`assets/img/hero.jpg`** and it replaces the blue "AH" block
-automatically. No code change needed.
+Already done — `assets/img/hero.jpg` is the cutout from your tip flyer, cropped
+to the 4:5 frame and sat high so the "available for booking" sticker fills the
+space at the bottom. `assets/img/og-image.jpg` (1200×630) is the matching share
+preview for iMessage and Facebook.
 
-- Portrait orientation works best (the frame is 4:5).
-- Resize it to about **1000px wide** before adding it, and keep it under
-  ~400KB. A 9MB phone photo will make the page slow to load on mobile data.
-  Preview on a Mac: open the image, **Tools → Adjust Size**, then
-  **File → Export** and drag quality to ~70%.
+**Note:** the crop stops well above the flyer's QR codes, so your Venmo code and
+phone number are not on the site anywhere.
 
-For the link preview when someone shares the site (iMessage, Facebook), add a
-second image at `assets/img/og-image.jpg`, landscape, 1200×630.
+To swap in a different photo later, just overwrite `assets/img/hero.jpg`:
+
+- Portrait orientation, 4:5. Around **1000px wide** and under ~400KB.
+- A 9MB phone photo will make the page crawl on mobile data. On a Mac, open it
+  in Preview → **Tools → Adjust Size**, then **File → Export** at ~70% quality.
+
+If the file is ever missing or misnamed, the page falls back to the "AH" block
+on its own rather than showing a broken image.
 
 ### Live videos
 
