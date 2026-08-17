@@ -36,7 +36,14 @@ const CONTENT = {
                                      └──── this bit ────┘
 
      Thumbnails are pulled from YouTube automatically. The video
-     only loads when someone clicks it, so the page stays fast.  */
+     only loads when someone clicks it, so the page stays fast.
+
+     Your channel: https://www.youtube.com/@alexdhowe
+     Upload a performance, open it, copy the ID from the address
+     bar into a line below, and delete the two leading slashes.
+
+     The Watch section stays hidden until at least one is filled
+     in, so the live site never shows an empty shelf.            */
 
   videos: [
     // { id: "PASTE_ID_HERE", title: "Either Way",  where: "Live, 2026" },
@@ -50,10 +57,10 @@ const CONTENT = {
      Delete any line you're not on yet.                          */
 
   platforms: [
-    { name: "Spotify", url: "https://open.spotify.com/artist/2u2IKqVi8S3WMlwzaTtom3" },
+    { name: "Spotify",    url: "https://open.spotify.com/artist/2u2IKqVi8S3WMlwzaTtom3" },
+    { name: "SoundCloud", url: "https://soundcloud.com/alexhowe" },
     // { name: "Apple Music", url: "" },
     // { name: "Bandcamp",    url: "" },
-    // { name: "SoundCloud",  url: "" },
   ],
 
 
@@ -69,10 +76,10 @@ const CONTENT = {
 
 
   /* ── 5. SOCIALS ─────────────────────────────────────────────
-     `network` picks the icon. These five have their own:
-       instagram, youtube, tiktok, facebook, spotify
-     Anything else (bandcamp, soundcloud, x, threads, your own
-     newsletter…) gets a clean diagonal arrow instead. That's a
+     `network` picks the icon. These six have their own:
+       instagram, youtube, tiktok, facebook, spotify, soundcloud
+     Anything else (bandcamp, x, threads, your own newsletter…)
+     gets a clean diagonal arrow instead. That's a
      deliberate part of the design, not a missing icon — the name
      is set in huge type right next to it.
 
@@ -81,8 +88,9 @@ const CONTENT = {
   socials: [
     { network: "instagram", handle: "@alexdhowe", url: "https://www.instagram.com/alexdhowe/" },
     { network: "tiktok",    handle: "@adhowe",    url: "https://www.tiktok.com/@adhowe" },
-    { network: "spotify",   handle: "Alex Howe",  url: "https://open.spotify.com/artist/2u2IKqVi8S3WMlwzaTtom3" },
-    // { network: "youtube",  handle: "@yourchannel", url: "https://youtube.com/@yourchannel" },
+    { network: "youtube",    handle: "@alexdhowe", url: "https://www.youtube.com/@alexdhowe" },
+    { network: "spotify",    handle: "Alex Howe",  url: "https://open.spotify.com/artist/2u2IKqVi8S3WMlwzaTtom3" },
+    { network: "soundcloud", handle: "alexhowe",   url: "https://soundcloud.com/alexhowe" },
     // { network: "facebook", handle: "Alex Howe Music", url: "" },
   ],
 

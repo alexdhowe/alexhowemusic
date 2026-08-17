@@ -38,6 +38,14 @@
       '<path d="M8.5 15.5c2.2-.5 4.4-.3 6.2.75"/></g>',
     tiktok:
       '<path d="M13.1 2.2h2.9c.25 2 1.45 3.5 3.95 3.75v2.9c-1.5.05-2.9-.4-4.05-1.2v5.9a5.35 5.35 0 1 1-5.35-5.35c.28 0 .55.02.82.06v3.02a2.4 2.4 0 1 0 1.73 2.3z"/>',
+    soundcloud:
+      // waveform bars rising into a cloud, drawn from primitives
+      '<g fill="currentColor">' +
+      '<rect x="1.4" y="11.4" width="1.5" height="5.1" rx=".75"/>' +
+      '<rect x="4.4" y="9.6"  width="1.5" height="6.9" rx=".75"/>' +
+      '<rect x="7.4" y="8.2"  width="1.5" height="8.3" rx=".75"/>' +
+      '<rect x="10.4" y="10.2" width="1.5" height="6.3" rx=".75"/></g>' +
+      '<path d="M13.6 16.5V8.5a4.7 4.7 0 0 1 2.6-.8 4.5 4.5 0 0 1 4.4 3.7 2.9 2.9 0 0 1-.8 5.1z"/>',
     email:
       '<rect x="2.2" y="4.6" width="19.6" height="14.8" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>' +
       '<path d="M3.2 6.2L12 13l8.8-6.8" fill="none" stroke="currentColor" stroke-width="2"/>',
