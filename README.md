@@ -1,4 +1,4 @@
-# Alexander Howe — artist site
+# Alex Howe — artist site
 
 Plain HTML, CSS, and JavaScript. No build step, no framework, no npm install,
 no dependencies to update. Open `index.html` in a browser and it just works.
@@ -26,8 +26,8 @@ Everything else (`style.css`, `main.js`) you can ignore.
 
 Create a new **public** repo at <https://github.com/new>.
 
-Name it `alexanderhowe.com` if you plan to buy that domain, or
-`alexander-howe-music` if not. Don't add a README — this folder has one.
+Name it `alexhowe.com` if you plan to buy that domain, or
+`alex-howe-music` if not. Don't add a README — this folder has one.
 
 Then, from inside this folder:
 
@@ -105,7 +105,7 @@ The live site updates in about a minute. Good for adding a show from your phone.
 
 ## A custom domain (optional, ~$12/year)
 
-The only thing here that isn't free. If you buy `alexanderhowe.com`:
+The only thing here that isn't free. If you buy `alexhowe.com`:
 
 1. Repo **Settings → Pages → Custom domain** → enter it → Save.
 2. At your registrar, add these DNS records:
@@ -141,9 +141,20 @@ with **Cmd+Shift+R**.
 ## Design notes
 
 Colors and fonts are defined once at the top of `assets/css/style.css`, in the
-`:root` block. Change `--acid`, `--flame`, or `--cobalt` there and the whole
+`:root` block. Change `--gold`, `--rust`, or `--indigo` there and the whole
 site follows.
+
+The palette is sampled from your **Turn Around** cover art — marigold, burnt
+sienna, and deep indigo on warm cream — so the site and the record read as the
+same person's work.
+
+If you swap colors, two rules keep the text readable:
+
+- text on `--rust` should be `--paper`, never `--ink`
+- text on `--gold` and `--paper` should be `--ink`
 
 The look is built on screen-printed gig-poster logic: flat color, hard edges,
 and offset shadows that shift on hover like slightly misregistered ink. There
 are deliberately no gradients, rounded cards, or soft drop shadows.
+
+Every text/background pair on the site currently clears WCAG AA contrast.

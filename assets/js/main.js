@@ -102,8 +102,8 @@
       var play = el("div", "vid__play");
       play.innerHTML =
         '<svg viewBox="0 0 100 100" aria-hidden="true">' +
-        '<circle cx="50" cy="50" r="46" fill="#D9F24B" stroke="#12100E" stroke-width="5"/>' +
-        '<path d="M40 30l30 20-30 20z" fill="#12100E"/></svg>';
+        '<circle cx="50" cy="50" r="46" fill="#E3A11B" stroke="#1C1712" stroke-width="5"/>' +
+        '<path d="M40 30l30 20-30 20z" fill="#1C1712"/></svg>';
 
       btn.appendChild(thumb);
       btn.appendChild(play);
@@ -168,7 +168,7 @@
     if (!upcoming.length) {
       var empty = el("div", "shows-empty reveal");
       empty.appendChild(el("p", null, "No dates on the books yet — let's fix that."));
-      var cta = el("a", "btn btn--flame", "Book a gig");
+      var cta = el("a", "btn btn--rust", "Book a gig");
       cta.href = "#book";
       empty.appendChild(cta);
       wrap.appendChild(empty);

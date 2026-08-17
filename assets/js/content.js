@@ -50,7 +50,7 @@ const CONTENT = {
      Delete any line you're not on yet.                          */
 
   platforms: [
-    // { name: "Spotify",     url: "" },
+    { name: "Spotify", url: "https://open.spotify.com/artist/2u2IKqVi8S3WMlwzaTtom3" },
     // { name: "Apple Music", url: "" },
     // { name: "Bandcamp",    url: "" },
     // { name: "SoundCloud",  url: "" },
@@ -79,11 +79,11 @@ const CONTENT = {
      Your email is added to the bottom of this list automatically.  */
 
   socials: [
-    // { network: "instagram", handle: "@yourhandle", url: "https://instagram.com/yourhandle" },
-    // { network: "youtube",   handle: "@yourchannel", url: "https://youtube.com/@yourchannel" },
-    // { network: "tiktok",    handle: "@yourhandle", url: "https://tiktok.com/@yourhandle" },
-    // { network: "facebook",  handle: "Alexander Howe Music", url: "" },
-    // { network: "spotify",   handle: "Alexander Howe", url: "" },
+    { network: "instagram", handle: "@alexdhowe", url: "https://www.instagram.com/alexdhowe/" },
+    { network: "tiktok",    handle: "@adhowe",    url: "https://www.tiktok.com/@adhowe" },
+    { network: "spotify",   handle: "Alex Howe",  url: "https://open.spotify.com/artist/2u2IKqVi8S3WMlwzaTtom3" },
+    // { network: "youtube",  handle: "@yourchannel", url: "https://youtube.com/@yourchannel" },
+    // { network: "facebook", handle: "Alex Howe Music", url: "" },
   ],
 
 };
