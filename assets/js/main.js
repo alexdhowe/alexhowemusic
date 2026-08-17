@@ -314,6 +314,17 @@
     });
   })();
 
+  /* ── drop nav links that point at an empty (hidden) section ──
+     Otherwise "Watch" sits in the menu doing nothing until the
+     first video is added.                                       */
+  (function pruneNav() {
+    var sel = '.nav a[href^="#"], .mobile-nav a[href^="#"], .hero__actions a[href^="#"]';
+    document.querySelectorAll(sel).forEach(function (a) {
+      var target = document.getElementById(a.getAttribute("href").slice(1));
+      if (target && target.hidden) a.remove();
+    });
+  })();
+
   /* ── mobile nav ───────────────────────────────────────────── */
   (function mobileNav() {
     var burger = $(".burger");
