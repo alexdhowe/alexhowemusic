@@ -90,8 +90,14 @@
 
     $("#watch").hidden = false;
 
+    // If every clip is phone-shot, tighten the grid so the tall cards
+    // don't each take a full-width column.
+    if (list.every(function (v) { return v.vertical; })) {
+      grid.classList.add("video-grid--vertical");
+    }
+
     list.forEach(function (v) {
-      var card = el("article", "vid reveal");
+      var card = el("article", "vid reveal" + (v.vertical ? " vid--vertical" : ""));
 
       var btn = el("button", "vid__frame");
       btn.type = "button";

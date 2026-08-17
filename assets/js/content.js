@@ -43,12 +43,17 @@ const CONTENT = {
      bar into a line below, and delete the two leading slashes.
 
      The Watch section stays hidden until at least one is filled
-     in, so the live site never shows an empty shelf.            */
+     in, so the live site never shows an empty shelf.
+
+     Add  vertical: true  for anything filmed on a phone held
+     upright. YouTube pads those out to a wide frame with a
+     darkened copy of the same shot; the flag crops that away.
+     Leave it off for normal widescreen video.                  */
 
   videos: [
-    // { id: "PASTE_ID_HERE", title: "Either Way",  where: "Live, 2026" },
-    // { id: "PASTE_ID_HERE", title: "I Am Yours",  where: "Live, 2026" },
-    // { id: "PASTE_ID_HERE", title: "Work Out",    where: "Live, 2026" },
+    { id: "TbYCoFNHU6M", title: "Rocket Man",            where: "Elton John \u00b7 Lion's Tail", vertical: true },
+    { id: "VMUOt1TaNxo", title: "Make You Feel My Love", where: "Adele \u00b7 Lion's Tail",      vertical: true },
+    { id: "WT_v72d4Nb0", title: "Fake Plastic Trees",    where: "Radiohead \u00b7 Lion's Tail",  vertical: true },
   ],
 
 
