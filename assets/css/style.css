@@ -26,6 +26,20 @@
                              text on it clears 4.5:1) */
   --indigo:   #27327C;   /* deep navy, from the eye motifs */
 
+  /* ── Two quieter alternatives ──────────────────────────────
+     Still not calm enough? Paste one of these blocks over the
+     five values above. Both keep every text pair above AA, so
+     nothing else needs touching.
+
+     DUST — same warmth, drained of saturation:
+       --ink: #1F1B16;  --paper: #F4EFE6;  --gold: #C9A227;
+       --rust: #8C4A2F; --indigo: #2E3A54;
+
+     NEWSPRINT — near-monochrome, colour used sparingly:
+       --ink: #17150F;  --paper: #F2EEE4;  --gold: #C8B27A;
+       --rust: #6B4A2A; --indigo: #26262A;
+     ────────────────────────────────────────────────────────── */
+
   --rule: 3px solid var(--ink);
   --shift: 9px;                    /* offset-shadow distance */
   --gut: clamp(1.25rem, 5vw, 4.5rem);
