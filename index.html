@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Alexander Howe — Live Music, Milwaukee WI</title>
+<meta name="description" content="Alexander Howe is a singer-songwriter based in Milwaukee, Wisconsin. Originals and covers for bars, weddings, and private events. Book a gig.">
+
+<!-- Open Graph / social sharing. Swap og-image.jpg once you add a photo. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Alexander Howe — Live Music, Milwaukee WI">
+<meta property="og:description" content="Singer-songwriter based in Milwaukee. Originals and covers for bars, weddings, and private events.">
+<meta property="og:image" content="assets/img/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23D9F24B'/><text x='50' y='73' font-family='Helvetica,Arial' font-weight='bold' font-size='62' text-anchor='middle' fill='%2312100E'>AH</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
+
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "Alexander Howe",
+  "genre": "Singer-Songwriter",
+  "email": "alexdhowe@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Milwaukee", "addressRegion": "WI", "addressCountry": "US" }
+}
+</script>
+</head>
+
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header class="site-head">
+  <a class="mark" href="#top" aria-label="Alexander Howe, home">
+    <span class="mark__box">AH</span>
+    <span class="mark__name">Alexander Howe</span>
+  </a>
+
+  <nav class="nav" aria-label="Main">
+    <a href="#watch">Watch</a>
+    <a href="#listen">Listen</a>
+    <a href="#shows">Shows</a>
+    <a href="#book" class="nav__cta">Book a gig</a>
+  </nav>
+
+  <button class="burger" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="mobile-nav" id="mobile-nav" hidden>
+  <a href="#watch">Watch</a>
+  <a href="#listen">Listen</a>
+  <a href="#shows">Shows</a>
+  <a href="#book">Book a gig</a>
+</div>
+
+<main id="main">
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="hero" id="top">
+  <div class="hero__grid">
+
+    <div class="hero__type">
+      <p class="kicker">Milwaukee, WI &nbsp;/&nbsp; Singer &amp; Songwriter</p>
+
+      <h1 class="hero__name">
+        <span class="line">Alexander</span>
+        <span class="line line--fill">Howe</span>
+      </h1>
+
+      <p class="hero__blurb">
+        Guitar, voice, and a stack of songs — originals alongside the covers people
+        actually want to hear. Available for bars, weddings, private events, and
+        anywhere else with a corner to play in.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#book" class="btn btn--flame">Book a gig</a>
+        <a href="#watch" class="btn btn--ghost">Watch live</a>
+      </div>
+    </div>
+
+    <div class="hero__art">
+      <!-- Drop a real photo at assets/img/hero.jpg and it replaces this block automatically. -->
+      <div class="photo" data-photo="assets/img/hero.jpg">
+        <div class="photo__fallback" aria-hidden="true">
+          <span>A</span><span>H</span>
+        </div>
+      </div>
+      <div class="sticker" aria-hidden="true">
+        <span>Available for booking</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════ MARQUEE ══════════════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Originals &amp; covers</span><i>◆</i>
+    <span>Bars &amp; breweries</span><i>◆</i>
+    <span>Weddings</span><i>◆</i>
+    <span>Private events</span><i>◆</i>
+    <span>Solo or full band</span><i>◆</i>
+  </div>
+</div>
+
+<!-- ══════════════════ 01 WATCH ══════════════════ -->
+<section class="section" id="watch" hidden>
+  <div class="section__head">
+    <p class="idx">01</p>
+    <h2>Watch</h2>
+    <p class="section__note">Live, one take, no net.</p>
+  </div>
+  <div class="video-grid" id="video-grid"></div>
+</section>
+
+<!-- ══════════════════ 02 LISTEN ══════════════════ -->
+<section class="section section--ink" id="listen" hidden>
+  <div class="section__head">
+    <p class="idx">02</p>
+    <h2>Listen</h2>
+    <p class="section__note">Recordings, wherever you keep your music.</p>
+  </div>
+  <div class="platforms" id="platforms"></div>
+</section>
+
+<!-- ══════════════════ 03 SHOWS ══════════════════ -->
+<section class="section" id="shows">
+  <div class="section__head">
+    <p class="idx">03</p>
+    <h2>Shows</h2>
+    <p class="section__note">Come say hello.</p>
+  </div>
+  <div id="shows-list"></div>
+</section>
+
+<!-- ══════════════════ 04 BOOK ══════════════════ -->
+<section class="section section--cobalt" id="book">
+  <div class="book">
+    <div class="book__pitch">
+      <p class="idx">04</p>
+      <h2>Book me<br>for a gig</h2>
+      <p class="book__copy">
+        Tell me the date, the room, and roughly how long you want me playing.
+        I answer every message — usually within a day.
+      </p>
+      <ul class="book__list">
+        <li>Solo acoustic or full band</li>
+        <li>2&ndash;4 hour sets, or ceremony + cocktail hour</li>
+        <li>I bring my own PA for rooms up to ~150</li>
+      </ul>
+    </div>
+
+    <form class="form" id="book-form" novalidate>
+      <div class="field">
+        <label for="f-name">Your name</label>
+        <input id="f-name" name="name" type="text" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" required autocomplete="email">
+      </div>
+      <div class="field field--half">
+        <label for="f-date">Event date</label>
+        <input id="f-date" name="date" type="date">
+      </div>
+      <div class="field field--half">
+        <label for="f-type">Type of event</label>
+        <select id="f-type" name="event_type">
+          <option>Bar / brewery</option>
+          <option>Wedding</option>
+          <option>Private party</option>
+          <option>Corporate</option>
+          <option>Festival</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-venue">Venue &amp; city</label>
+        <input id="f-venue" name="venue" type="text">
+      </div>
+      <div class="field">
+        <label for="f-msg">Details</label>
+        <textarea id="f-msg" name="message" rows="4" required></textarea>
+      </div>
+
+      <!-- Honeypot: bots fill this, humans never see it. -->
+      <div class="hp" aria-hidden="true">
+        <label for="f-hp">Leave this empty</label>
+        <input id="f-hp" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <button class="btn btn--acid btn--wide" type="submit">Send it</button>
+      <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer class="site-foot">
+  <div class="foot__socials">
+    <p class="idx">05</p>
+    <h2>Elsewhere</h2>
+    <ul class="social-list" id="social-list"></ul>
+  </div>
+
+  <div class="foot__base">
+    <p class="foot__mail">
+      <a href="mailto:alexdhowe@gmail.com">alexdhowe@gmail.com</a>
+    </p>
+    <p class="foot__copy">&copy; <span id="year"></span> Alexander Howe. Milwaukee, Wisconsin.</p>
+  </div>
+</footer>
+
+<script src="assets/js/content.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

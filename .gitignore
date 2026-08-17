@@ -1,0 +1,7 @@
+.DS_Store
+Thumbs.db
+
+# Big media doesn't belong in the repo — put video on YouTube and link to it.
+*.mp4
+*.mov
+*.wav
