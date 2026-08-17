@@ -328,6 +328,29 @@
     });
   })();
 
+  /* ── TikTok button in the hero ────────────────────────────────
+     Built from the socials list rather than hardcoded, so the URL
+     lives in exactly one place. Drop TikTok from content.js and
+     this button disappears with it.                              */
+  (function heroSocial() {
+    var actions = $(".hero__actions");
+    if (!actions) return;
+
+    var tt = (C.socials || []).filter(function (s) {
+      return s && s.url && String(s.network).toLowerCase() === "tiktok";
+    })[0];
+    if (!tt) return;
+
+    var a = el("a", "btn btn--tiktok");
+    a.href = tt.url;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.appendChild(icon("tiktok"));
+    a.appendChild(el("span", null, "TikTok"));
+    if (tt.handle) a.setAttribute("aria-label", "Follow " + tt.handle + " on TikTok");
+    actions.appendChild(a);
+  })();
+
   /* ── drop nav links that point at an empty (hidden) section ──
      Otherwise "Watch" sits in the menu doing nothing until the
      first video is added.                                       */

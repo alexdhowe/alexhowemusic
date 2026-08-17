@@ -112,6 +112,8 @@ img{ max-width:100%; display:block; }
 .btn--rust{ background:var(--rust); color:var(--paper); }
 .btn--gold{ background:var(--gold); }
 .btn--ghost{ background:transparent; box-shadow:var(--shift) var(--shift) 0 var(--rust); }
+.btn--tiktok{ background:var(--gold); display:inline-flex; align-items:center; gap:.45em; }
+.btn--tiktok svg{ width:.95em; height:.95em; fill:currentColor; flex-shrink:0; }
 .btn--wide{ width:100%; text-align:center; }
 
 /* ═══════════════ HEADER ═══════════════ */
