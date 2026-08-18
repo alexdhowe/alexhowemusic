@@ -40,7 +40,7 @@ git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO.git && git bran
 In the repo: **Settings → Pages → Source: Deploy from a branch → `main` / `root` → Save.**
 
 Wait about a minute. Your site is live at
-`https://YOUR-USERNAME.github.io/YOUR-REPO/`.
+**https://alexhowelive.com** (repo: alexdhowe/alexhowemusic).
 
 From here on, every `git push` updates the live site automatically.
 
@@ -110,23 +110,24 @@ The live site updates in about a minute. Good for adding a show from your phone.
 
 ## A custom domain (optional, ~$12/year)
 
-The only thing here that isn't free. If you buy `alexhowe.com`:
+**Done** — the site runs on `alexhowelive.com`, bought through Cloudflare. Recorded here in case you ever need to redo it:
 
-1. Repo **Settings → Pages → Custom domain** → enter it → Save.
-2. At your registrar, add these DNS records:
+Cloudflare DNS, all five records set to **DNS only** (grey cloud, not proxied —
+the orange cloud causes an infinite redirect loop with GitHub Pages):
 
-   | Type | Name | Value |
-   |------|------|-------|
-   | A | @ | `185.199.108.153` |
-   | A | @ | `185.199.109.153` |
-   | A | @ | `185.199.110.153` |
-   | A | @ | `185.199.111.153` |
-   | CNAME | www | `YOUR-USERNAME.github.io` |
+| Type | Name | Value |
+|------|------|-------|
+| A | @ | `185.199.108.153` |
+| A | @ | `185.199.109.153` |
+| A | @ | `185.199.110.153` |
+| A | @ | `185.199.111.153` |
+| CNAME | www | `alexdhowe.github.io` |
 
-3. Back in Pages, tick **Enforce HTTPS** once it becomes available
-   (can take a few hours — this is normal, don't panic).
+The `CNAME` file in this folder is what tells GitHub which domain to answer on —
+don't delete it. SSL is a free Let's Encrypt cert that GitHub renews on its own.
 
----
+`www.alexhowelive.com` and the old `alexdhowe.github.io/alexhowemusic` URL both
+redirect to the bare domain, so old links keep working.
 
 ## Previewing locally
 
