@@ -200,7 +200,9 @@
 
       var info = el("div");
       info.appendChild(el("h3", "show__venue", s.venue));
-      if (s.city) info.appendChild(el("p", "show__city", s.city));
+      var sub = [s.city, s.start ? s.start + (s.end ? "\u2013" + s.end : "") : null]
+        .filter(Boolean).join(" \u00b7 ");
+      if (sub) info.appendChild(el("p", "show__city", sub));
 
       row.appendChild(date);
       row.appendChild(info);
@@ -214,6 +216,164 @@
       }
       wrap.appendChild(row);
     });
+  })();
+
+  /* ── month calendar ───────────────────────────────────────────
+     Same `shows` data as section 03. Shows the whole month one
+     day per cell, played gigs in rust and upcoming ones in gold.
+     Details appear on hover, on keyboard focus, and on tap —
+     phones have no hover, so the tap path is the important one. */
+  (function calendar() {
+    var mount = $("#calendar");
+    if (!mount) return;
+
+    var MONTHS = ["January","February","March","April","May","June",
+                  "July","August","September","October","November","December"];
+    var DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Built from parts so a date never slips a day by timezone.
+    var gigs = (C.shows || [])
+      .filter(function (g) { return g && g.date && g.venue; })
+      .map(function (g) {
+        var p = String(g.date).split("-");
+        var d = new Date(+p[0], +p[1] - 1, +p[2]);
+        return isNaN(d) ? null : { d: d, g: g };
+      })
+      .filter(Boolean);
+
+    function stamp(d) { return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate(); }
+
+    var byDay = {};
+    gigs.forEach(function (x) { (byDay[stamp(x.d)] = byDay[stamp(x.d)] || []).push(x); });
+
+    var view = new Date(today.getFullYear(), today.getMonth(), 1);
+    var tip = el("div", "cal__tip");
+    tip.setAttribute("aria-hidden", "true");
+
+    // Built as DOM nodes, not an HTML string, so a stray < or & in a
+    // venue name typed into content.js can never break the markup.
+    function details(x) {
+      var frag = document.createDocumentFragment();
+      if (x.g.title) {
+        frag.appendChild(el("strong", "cal__tipTitle", x.g.title));
+      }
+      frag.appendChild(el("span", null, x.g.venue + (x.g.city ? ", " + x.g.city : "")));
+      frag.appendChild(el("span", "cal__tipWhen",
+        DOW[x.d.getDay()] + " " + MONTHS[x.d.getMonth()] + " " + x.d.getDate() +
+        (x.g.start ? " \u00b7 " + x.g.start + (x.g.end ? "\u2013" + x.g.end : "") : "")));
+      return frag;
+    }
+
+    function label(x, past) {
+      return (past ? "Played: " : "Upcoming: ") +
+        (x.g.title ? x.g.title + ", " : "") + x.g.venue +
+        (x.g.city ? ", " + x.g.city : "") + ", " +
+        MONTHS[x.d.getMonth()] + " " + x.d.getDate() +
+        (x.g.start ? ", " + x.g.start + (x.g.end ? " to " + x.g.end : "") : "");
+    }
+
+    function showTip(btn, x) {
+      tip.textContent = "";
+      tip.appendChild(details(x));
+      tip.classList.add("is-on");
+      // Position above the cell, clamped inside the calendar box.
+      var cb = mount.getBoundingClientRect();
+      var bb = btn.getBoundingClientRect();
+      var w = tip.offsetWidth;
+      var left = bb.left - cb.left + bb.width / 2 - w / 2;
+      left = Math.max(8, Math.min(left, cb.width - w - 8));
+      var top = bb.top - cb.top - tip.offsetHeight - 8;
+      if (top < 4) top = bb.top - cb.top + bb.height + 8;   // flip below near the top row
+      tip.style.left = left + "px";
+      tip.style.top = top + "px";
+    }
+
+    function hideTip() { tip.classList.remove("is-on"); }
+
+    function render() {
+      mount.innerHTML = "";
+      hideTip();
+
+      var head = el("div", "cal__head");
+      head.appendChild(el("p", "cal__month",
+        MONTHS[view.getMonth()] + " " + view.getFullYear()));
+
+      var nav = el("div", "cal__nav");
+      [["←", -1, "Previous month"], ["→", 1, "Next month"]].forEach(function (n) {
+        var b = el("button", null, n[0]);
+        b.type = "button";
+        b.setAttribute("aria-label", n[2]);
+        b.addEventListener("click", function () {
+          view = new Date(view.getFullYear(), view.getMonth() + n[1], 1);
+          render();
+        });
+        nav.appendChild(b);
+      });
+      head.appendChild(nav);
+      mount.appendChild(head);
+
+      var grid = el("div", "cal__grid");
+      DOW.forEach(function (d) { grid.appendChild(el("div", "cal__dow", d)); });
+
+      var first = new Date(view.getFullYear(), view.getMonth(), 1);
+      var days = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
+
+      for (var i = 0; i < first.getDay(); i++) grid.appendChild(el("div", "cal__day cal__day--pad"));
+
+      var count = 0;
+      for (var day = 1; day <= days; day++) {
+        var d = new Date(view.getFullYear(), view.getMonth(), day);
+        var cell = el("div", "cal__day");
+        if (d.getTime() === today.getTime()) cell.classList.add("cal__day--today");
+        cell.appendChild(el("span", "cal__num", String(day)));
+
+        (byDay[stamp(d)] || []).forEach(function (x) {
+          count++;
+          var past = x.d < today;
+          var btn = el("button", "cal__gig " + (past ? "cal__gig--past" : "cal__gig--next"));
+          btn.type = "button";
+          btn.setAttribute("aria-label", label(x, past));
+          btn.appendChild(el("span", null, x.g.venue));
+
+          btn.addEventListener("mouseenter", function () { showTip(btn, x); });
+          btn.addEventListener("mouseleave", hideTip);
+          btn.addEventListener("focus", function () { showTip(btn, x); });
+          btn.addEventListener("blur", hideTip);
+          btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            if (tip.classList.contains("is-on")) hideTip(); else showTip(btn, x);
+          });
+          cell.appendChild(btn);
+        });
+
+        grid.appendChild(cell);
+      }
+
+      // Trailing pads so the last row is always a full seven.
+      var trail = (7 - ((first.getDay() + days) % 7)) % 7;
+      for (var t = 0; t < trail; t++) grid.appendChild(el("div", "cal__day cal__day--pad"));
+
+      mount.appendChild(grid);
+
+      var legend = el("div", "cal__legend");
+      [["cal__swatch--past", "Played"], ["cal__swatch--next", "Booked"]].forEach(function (k) {
+        var key = el("span", "cal__key");
+        key.appendChild(el("span", "cal__swatch " + k[0]));
+        key.appendChild(el("span", null, k[1]));
+        legend.appendChild(key);
+      });
+      if (!count) legend.appendChild(el("span", "cal__key cal__key--none", "Nothing booked this month"));
+      mount.appendChild(legend);
+
+      mount.appendChild(tip);
+    }
+
+    document.addEventListener("click", hideTip);
+    window.addEventListener("resize", hideTip);
+    render();
   })();
 
   /* ── socials ──────────────────────────────────────────────── */

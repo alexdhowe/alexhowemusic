@@ -90,14 +90,41 @@ Upload them to YouTube instead (free, unlimited), then paste the video IDs into
 `content.js`. The site shows the thumbnail and only loads the player when
 someone actually clicks, so the page stays fast.
 
-### Shows
+### Gigs (calendar + shows list)
 
-Add them to `shows` in `content.js` using `YYYY-MM-DD` dates. Past dates remove
-themselves automatically the morning after — you never have to clean the list
-up, and the site never shows a stale gig.
+One list in `content.js` feeds two places on the page, so a gig is only ever
+entered once:
 
-With no upcoming shows, that section turns into a "no dates yet — let's fix
-that" panel that points at the booking form. So it's never dead space.
+```js
+{
+  date:  "2026-08-13",              // required, YYYY-MM-DD
+  title: "Alex Howe Live & Acoustic",
+  venue: "Lion's Tail Brewery",     // required
+  city:  "Wauwatosa, WI",
+  start: "6:00 PM",
+  end:   "8:30 PM",
+  ticketUrl: ""                     // "" for free / no-ticket gigs
+}
+```
+
+Only `date` and `venue` are required — leave anything else out and it's simply
+not displayed.
+
+**The calendar** sits above the booking form and shows a whole month at a time.
+Gigs you've already played are rust, upcoming ones are gold. Hovering a gig
+(or tapping it on a phone) opens a card with the venue, city and set times.
+Arrows move between months, and it always opens on the current one.
+
+On a narrow phone screen a cell is too small for a venue name, so gigs become
+solid colour bars — tapping still opens the same detail card.
+
+**The shows list** (section 03) shows upcoming gigs only. Past dates drop off
+it by themselves the morning after, so you never have to tidy up, and the site
+never advertises a gig that already happened. They stay on the calendar though,
+which is the point — it shows you've been working.
+
+With nothing upcoming, section 03 turns into a "no dates yet — let's fix that"
+panel pointing at the booking form, so it's never dead space.
 
 ---
 

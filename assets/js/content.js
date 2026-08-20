@@ -69,14 +69,39 @@ const CONTENT = {
   ],
 
 
-  /* ── 4. UPCOMING SHOWS ──────────────────────────────────────
-     Date must be YYYY-MM-DD. Past dates disappear on their own
-     the morning after the show — you never have to clean up.
-     `ticketUrl` is optional; leave it "" for free/no-ticket gigs. */
+  /* ── 4. GIGS ────────────────────────────────────────────────
+     One list, two places on the page:
+
+       • The CALENDAR above the booking form shows every gig in
+         the month you're looking at — played ones in rust,
+         upcoming ones in gold.
+       • The SHOWS list (section 03) shows upcoming gigs only.
+         Past dates drop off it by themselves the morning after,
+         so you never have to tidy up.
+
+     `date` must be YYYY-MM-DD.
+     `title`, `start`, `end` and `ticketUrl` are all optional —
+     anything you leave out is simply left off the display.        */
 
   shows: [
-    // { date: "2026-09-12", venue: "Company Brewing", city: "Milwaukee, WI", ticketUrl: "" },
-    // { date: "2026-10-03", venue: "Anodyne Coffee",  city: "Milwaukee, WI", ticketUrl: "" },
+    {
+      date: "2026-08-13",
+      title: "Alex Howe Live & Acoustic",
+      venue: "Lion's Tail Brewery",
+      city: "Wauwatosa, WI",
+      start: "6:00 PM",
+      end: "8:30 PM",
+      ticketUrl: ""
+    },
+    {
+      date: "2026-08-19",
+      title: "Alex Howe Live & Acoustic",
+      venue: "Birch / Denim Park MKE",
+      city: "Milwaukee, WI",
+      start: "6:00 PM",
+      end: "8:30 PM",
+      ticketUrl: ""
+    },
   ],
 
 

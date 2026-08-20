@@ -148,10 +148,18 @@
 
 <!-- ══════════════════ 04 BOOK ══════════════════ -->
 <section class="section section--indigo" id="book">
+  <div class="section__head">
+    <p class="idx">04</p>
+    <h2>Book me for a gig</h2>
+    <p class="section__note">Tap or hover a date for details.</p>
+  </div>
+
+  <!-- Month calendar. Rendered from the same `shows` list in content.js
+       that feeds section 03, so a gig is only ever entered once. -->
+  <div class="cal" id="calendar"></div>
+
   <div class="book">
     <div class="book__pitch">
-      <p class="idx">04</p>
-      <h2>Book me<br>for a gig</h2>
       <p class="book__copy">
         Tell me the date, the room, and roughly how long you want me playing.
         I answer every message — usually within a day.

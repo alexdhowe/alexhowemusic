@@ -257,6 +257,7 @@ img{ max-width:100%; display:block; }
 
 .section--ink{ background:var(--ink); color:var(--paper); }
 .section--ink .section__head{ border-color:var(--paper); }
+.section--indigo .section__head{ border-color:var(--paper); }
 
 .section--indigo{ background:var(--indigo); color:var(--paper); }
 
@@ -361,6 +362,95 @@ img{ max-width:100%; display:block; }
 @media (max-width:620px){
   .show{ grid-template-columns:auto 1fr; }
   .show__link{ grid-column:1 / -1; justify-self:start; }
+}
+
+/* ═══════════════ CALENDAR ═══════════════ */
+/* A cream sheet laid on the indigo block. The grid lines are the
+   ink background showing through 2px gaps rather than borders, so
+   they stay hairline-crisp at every zoom level. */
+.cal{
+  position:relative;
+  background:var(--paper); color:var(--ink);
+  border:var(--rule); box-shadow:var(--shift) var(--shift) 0 var(--ink);
+  padding:clamp(.9rem,2.2vw,1.6rem);
+  margin-bottom:clamp(2.5rem,5vw,4rem);
+}
+
+.cal__head{
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  border-bottom:var(--rule); padding-bottom:.7rem; margin-bottom:.9rem;
+}
+.cal__month{ margin:0; font-family:var(--f-display); text-transform:uppercase;
+  font-size:clamp(1.4rem,4vw,2.4rem); line-height:1; }
+
+.cal__nav{ display:flex; gap:.5rem; flex-shrink:0; }
+.cal__nav button{
+  font-family:var(--f-mono); font-size:.9rem; font-weight:700; line-height:1;
+  background:var(--paper); color:var(--ink); border:2px solid var(--ink);
+  padding:.45rem .7rem; cursor:pointer; border-radius:0;
+}
+.cal__nav button:hover{ background:var(--gold); }
+
+.cal__grid{
+  display:grid; grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:2px; background:var(--ink); border:2px solid var(--ink);
+}
+.cal__dow{
+  background:var(--ink); color:var(--paper); text-align:center;
+  font-family:var(--f-mono); font-size:.58rem; font-weight:700;
+  letter-spacing:.12em; text-transform:uppercase; padding:.45rem 0;
+}
+.cal__day{
+  background:var(--paper); min-height:clamp(46px,8vw,78px);
+  padding:.3rem; display:flex; flex-direction:column; gap:.2rem;
+}
+.cal__day--pad{ background:#EDE5D3; }        /* days spilling from the neighbouring month */
+.cal__num{ font-family:var(--f-mono); font-size:.68rem; font-weight:700; line-height:1; }
+.cal__day--today .cal__num{
+  background:var(--ink); color:var(--paper); padding:.15em .35em; align-self:flex-start;
+}
+
+.cal__gig{
+  margin-top:auto; width:100%; text-align:left; cursor:pointer;
+  border:0; border-radius:0; padding:.25rem .3rem;
+  font-family:var(--f-mono); font-size:.55rem; font-weight:700;
+  letter-spacing:.03em; text-transform:uppercase; line-height:1.15;
+  overflow:hidden;
+}
+.cal__gig--past{ background:var(--rust); color:var(--paper); }
+.cal__gig--next{ background:var(--gold); color:var(--ink); }
+.cal__gig:hover,.cal__gig:focus-visible{ outline:2px solid var(--ink); outline-offset:-2px; }
+
+.cal__tip{
+  position:absolute; z-index:30; width:min(250px,74vw);
+  background:var(--ink); color:var(--paper); border:2px solid var(--ink);
+  padding:.65rem .8rem; font-size:.78rem; line-height:1.42;
+  pointer-events:none; opacity:0; transform:translateY(4px);
+  transition:opacity .12s ease, transform .12s ease;
+}
+.cal__tip.is-on{ opacity:1; transform:none; }
+.cal__tip > *{ display:block; }
+.cal__tipTitle{ font-family:var(--f-display); font-size:1rem; text-transform:uppercase;
+  letter-spacing:.02em; margin-bottom:.15rem; }
+.cal__tipWhen{ font-family:var(--f-mono); font-size:.68rem; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--gold); margin-top:.3rem; }
+
+.cal__legend{
+  display:flex; flex-wrap:wrap; gap:.5rem 1.25rem; margin-top:.85rem;
+  font-family:var(--f-mono); font-size:.62rem; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase;
+}
+.cal__key{ display:inline-flex; align-items:center; gap:.45rem; }
+.cal__key--none{ opacity:.6; }
+.cal__swatch{ width:13px; height:13px; border:2px solid var(--ink); flex-shrink:0; }
+.cal__swatch--past{ background:var(--rust); }
+.cal__swatch--next{ background:var(--gold); }
+
+/* Phone: a cell is too narrow for a venue name, so the gig becomes a
+   solid bar. Tapping it still opens the same detail card. */
+@media (max-width:600px){
+  .cal__gig{ height:9px; padding:0; }
+  .cal__gig span{ display:none; }
 }
 
 /* ═══════════════ BOOKING ═══════════════ */
