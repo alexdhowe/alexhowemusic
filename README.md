@@ -118,6 +118,27 @@ Arrows move between months, and it always opens on the current one.
 On a narrow phone screen a cell is too small for a venue name, so gigs become
 solid colour bars — tapping still opens the same detail card.
 
+### Blocking out dates
+
+Days you're not available go in `blocked`, separately from gigs:
+
+```js
+blocked: [
+  { start: "2026-09-17", end: "2026-09-20" },   // end is INCLUSIVE
+  { start: "2026-11-02" },                      // single day
+  { start: "2026-12-24", end: "2026-12-26", label: "Out of town" },
+],
+```
+
+They appear on the calendar as hatched cells. Hovering or tapping any day in a
+range reports the whole range, not just that day.
+
+`label` defaults to "Unavailable" and is **public** — keep it vague unless you
+don't mind people reading it.
+
+Blocking a date doesn't stop anyone submitting the booking form for that day;
+it only shows the block on the calendar.
+
 **The shows list** (section 03) shows upcoming gigs only. Past dates drop off
 it by themselves the morning after, so you never have to tidy up, and the site
 never advertises a gig that already happened. They stay on the calendar though,

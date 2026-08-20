@@ -249,6 +249,28 @@
     var byDay = {};
     gigs.forEach(function (x) { (byDay[stamp(x.d)] = byDay[stamp(x.d)] || []).push(x); });
 
+    // Blocked-out ranges, expanded to one entry per day so a cell
+    // lookup is a single hash hit like the gigs above.
+    function parseDay(str) {
+      var p = String(str).split("-");
+      var d = new Date(+p[0], +p[1] - 1, +p[2]);
+      return isNaN(d) ? null : d;
+    }
+
+    var blocked = {};
+    (C.blocked || []).forEach(function (b) {
+      if (!b || !b.start) return;
+      var s0 = parseDay(b.start);
+      var e0 = b.end ? parseDay(b.end) : (s0 && new Date(s0));
+      if (!s0 || !e0 || e0 < s0) return;
+      var range = { s: s0, e: e0, label: b.label || "Unavailable" };
+      var cur = new Date(s0);
+      while (cur <= e0) {
+        blocked[stamp(cur)] = range;
+        cur.setDate(cur.getDate() + 1);
+      }
+    });
+
     var view = new Date(today.getFullYear(), today.getMonth(), 1);
     var tip = el("div", "cal__tip");
     tip.setAttribute("aria-hidden", "true");
@@ -267,6 +289,22 @@
       return frag;
     }
 
+    function shortDate(d) { return MONTHS[d.getMonth()].slice(0, 3) + " " + d.getDate(); }
+
+    function blockDetails(blk) {
+      var frag = document.createDocumentFragment();
+      frag.appendChild(el("strong", "cal__tipTitle", blk.label));
+      frag.appendChild(el("span", "cal__tipWhen",
+        shortDate(blk.s) + (blk.e.getTime() !== blk.s.getTime()
+          ? " \u2013 " + shortDate(blk.e) : "")));
+      return frag;
+    }
+
+    function blockLabel(blk) {
+      return blk.label + ", " + shortDate(blk.s) +
+        (blk.e.getTime() !== blk.s.getTime() ? " to " + shortDate(blk.e) : "");
+    }
+
     function label(x, past) {
       return (past ? "Played: " : "Upcoming: ") +
         (x.g.title ? x.g.title + ", " : "") + x.g.venue +
@@ -275,9 +313,9 @@
         (x.g.start ? ", " + x.g.start + (x.g.end ? " to " + x.g.end : "") : "");
     }
 
-    function showTip(btn, x) {
+    function showTip(btn, build) {
       tip.textContent = "";
-      tip.appendChild(details(x));
+      tip.appendChild(build());
       tip.classList.add("is-on");
       // Position above the cell, clamped inside the calendar box.
       var cb = mount.getBoundingClientRect();
@@ -323,28 +361,51 @@
 
       for (var i = 0; i < first.getDay(); i++) grid.appendChild(el("div", "cal__day cal__day--pad"));
 
-      var count = 0;
+      var count = 0, blockedCount = 0, playedCount = 0, bookedCount = 0;
       for (var day = 1; day <= days; day++) {
         var d = new Date(view.getFullYear(), view.getMonth(), day);
         var cell = el("div", "cal__day");
         if (d.getTime() === today.getTime()) cell.classList.add("cal__day--today");
         cell.appendChild(el("span", "cal__num", String(day)));
 
+        var blk = blocked[stamp(d)];
+        if (blk) {
+          blockedCount++;
+          cell.classList.add("cal__day--blocked");
+          // A transparent button laid over the whole cell: keeps the
+          // hatch clean while still being tappable and focusable.
+          var bb = el("button", "cal__block");
+          bb.type = "button";
+          bb.setAttribute("aria-label", blockLabel(blk));
+          var bbuild = (function (b2) { return function () { return blockDetails(b2); }; })(blk);
+          bb.addEventListener("mouseenter", function () { showTip(bb, bbuild); });
+          bb.addEventListener("mouseleave", hideTip);
+          bb.addEventListener("focus", function () { showTip(bb, bbuild); });
+          bb.addEventListener("blur", hideTip);
+          bb.addEventListener("click", function (e) {
+            e.stopPropagation();
+            if (tip.classList.contains("is-on")) hideTip(); else showTip(bb, bbuild);
+          });
+          cell.appendChild(bb);
+        }
+
         (byDay[stamp(d)] || []).forEach(function (x) {
           count++;
           var past = x.d < today;
+          if (past) playedCount++; else bookedCount++;
           var btn = el("button", "cal__gig " + (past ? "cal__gig--past" : "cal__gig--next"));
           btn.type = "button";
           btn.setAttribute("aria-label", label(x, past));
           btn.appendChild(el("span", null, x.g.venue));
 
-          btn.addEventListener("mouseenter", function () { showTip(btn, x); });
+          var build = function () { return details(x); };
+          btn.addEventListener("mouseenter", function () { showTip(btn, build); });
           btn.addEventListener("mouseleave", hideTip);
-          btn.addEventListener("focus", function () { showTip(btn, x); });
+          btn.addEventListener("focus", function () { showTip(btn, build); });
           btn.addEventListener("blur", hideTip);
           btn.addEventListener("click", function (e) {
             e.stopPropagation();
-            if (tip.classList.contains("is-on")) hideTip(); else showTip(btn, x);
+            if (tip.classList.contains("is-on")) hideTip(); else showTip(btn, build);
           });
           cell.appendChild(btn);
         });
@@ -358,13 +419,18 @@
 
       mount.appendChild(grid);
 
+      // Only key what's actually on screen this month — a Played swatch
+      // in a month with no gigs is noise.
       var legend = el("div", "cal__legend");
-      [["cal__swatch--past", "Played"], ["cal__swatch--next", "Booked"]].forEach(function (k) {
-        var key = el("span", "cal__key");
-        key.appendChild(el("span", "cal__swatch " + k[0]));
-        key.appendChild(el("span", null, k[1]));
-        legend.appendChild(key);
-      });
+      function key(swatch, text) {
+        var k = el("span", "cal__key");
+        k.appendChild(el("span", "cal__swatch " + swatch));
+        k.appendChild(el("span", null, text));
+        legend.appendChild(k);
+      }
+      if (playedCount) key("cal__swatch--past", "Played");
+      if (bookedCount) key("cal__swatch--next", "Booked");
+      if (blockedCount) key("cal__swatch--blocked", "Unavailable");
       if (!count) legend.appendChild(el("span", "cal__key cal__key--none", "Nothing booked this month"));
       mount.appendChild(legend);
 

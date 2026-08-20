@@ -401,11 +401,28 @@ img{ max-width:100%; display:block; }
   letter-spacing:.12em; text-transform:uppercase; padding:.45rem 0;
 }
 .cal__day{
+  position:relative;
   background:var(--paper); min-height:clamp(46px,8vw,78px);
   padding:.3rem; display:flex; flex-direction:column; gap:.2rem;
 }
 .cal__day--pad{ background:#EDE5D3; }        /* days spilling from the neighbouring month */
-.cal__num{ font-family:var(--f-mono); font-size:.68rem; font-weight:700; line-height:1; }
+.cal__num{ position:relative; z-index:1;
+  font-family:var(--f-mono); font-size:.68rem; font-weight:700; line-height:1; }
+
+/* Blocked-out days. Hard-edged diagonal hatch — colour stops with no
+   blending, so it reads as printed tape rather than a soft gradient. */
+.cal__day--blocked{
+  background:repeating-linear-gradient(-45deg,
+    #E2D7BE 0 5px, #F7F1E3 5px 10px);
+}
+.cal__day--blocked .cal__num{ opacity:.55; }
+.cal__block{
+  position:absolute; inset:0; width:100%; padding:0;
+  border:0; background:transparent; cursor:help;
+}
+.cal__block:hover,.cal__block:focus-visible{
+  outline:2px solid var(--ink); outline-offset:-2px;
+}
 .cal__day--today .cal__num{
   background:var(--ink); color:var(--paper); padding:.15em .35em; align-self:flex-start;
 }
@@ -445,6 +462,8 @@ img{ max-width:100%; display:block; }
 .cal__swatch{ width:13px; height:13px; border:2px solid var(--ink); flex-shrink:0; }
 .cal__swatch--past{ background:var(--rust); }
 .cal__swatch--next{ background:var(--gold); }
+.cal__swatch--blocked{ background:repeating-linear-gradient(-45deg,
+  #E2D7BE 0 3px, #F7F1E3 3px 6px); }
 
 /* Phone: a cell is too narrow for a venue name, so the gig becomes a
    solid bar. Tapping it still opens the same detail card. */

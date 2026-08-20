@@ -105,6 +105,24 @@ const CONTENT = {
   ],
 
 
+  /* ── 4b. BLOCKED-OUT DATES ──────────────────────────────────
+     Days you're not available. They show on the calendar as a
+     hatched block so anyone browsing can see you're spoken for,
+     without saying why.
+
+     `end` is inclusive — the range below covers the 17th, 18th,
+     19th AND 20th. Drop `end` for a single day.
+
+     `label` is optional and defaults to "Unavailable". Whatever
+     you put here is PUBLIC, so keep it vague unless you don't
+     mind people knowing ("Out of town" is fine, "Dentist" isn't). */
+
+  blocked: [
+    { start: "2026-09-17", end: "2026-09-20" },
+    { start: "2026-10-24", end: "2026-10-31" },
+  ],
+
+
   /* ── 5. SOCIALS ─────────────────────────────────────────────
      `network` picks the icon. These six have their own:
        instagram, youtube, tiktok, facebook, spotify, soundcloud
